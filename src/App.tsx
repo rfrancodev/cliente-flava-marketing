@@ -1361,7 +1361,7 @@ export default function App() {
                   <h3 className="text-brand-gold-400 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-gold-500 animate-ping" /> {SITE_COPY.contact.badge}
                   </h3>
-                  <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+                  <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-black leading-tight">
                     {SITE_COPY.contact.title}
                   </h2>
                   <p className="text-xs sm:text-sm text-brand-olive-300">
@@ -1643,7 +1643,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-brand-olive-950 py-12 text-brand-olive-400 text-center border-t border-brand-olive-900 px-4">
         <div className="max-w-7xl mx-auto space-y-6">
-          <div className="font-serif text-xl font-bold tracking-tight text-white">
+          <div className="font-serif text-xl font-bold tracking-tight text-black">
             {SITE_COPY.header.brandName} <span className="text-brand-gold-500 italic">{SITE_COPY.header.brandSurname}</span>
           </div>
           <p className="text-xs max-w-md mx-auto leading-relaxed">
