@@ -110,6 +110,41 @@ export default function App() {
     }
   }, []);
 
+  // Fetch leads from Cloudflare Pages D1 Database
+  const fetchDbLeads = async () => {
+    try {
+      const response = await fetch("/api/leads");
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && Array.isArray(data.leads)) {
+          // Sync database leads with local leads, avoiding duplicates by id
+          setLeadsList(prev => {
+            const merged = [...data.leads, ...prev];
+            const uniqueMap = new Map();
+            merged.forEach(lead => {
+              if (lead && lead.id) {
+                uniqueMap.set(lead.id, lead);
+              }
+            });
+            const uniqueLeads = Array.from(uniqueMap.values());
+            // Update local storage to keep them in sync
+            localStorage.setItem("ana_flavia_leads", JSON.stringify(uniqueLeads));
+            return uniqueLeads;
+          });
+        }
+      }
+    } catch (e) {
+      console.warn("Could not sync with Cloudflare D1 database. Using local backup.", e);
+    }
+  };
+
+  // Sync leads when panel is opened
+  useEffect(() => {
+    if (showLeadsPanel) {
+      fetchDbLeads();
+    }
+  }, [showLeadsPanel]);
+
   // Filter cases based on selected category tab
   // When "todos" is selected, display exactly 1 case from each client.
   // When a specific category is selected, display all 3 cases of that client.
@@ -200,6 +235,23 @@ export default function App() {
     localStorage.setItem("ana_flavia_leads", JSON.stringify(updatedLeads));
     setFormSubmitted(true);
 
+    // Send to Cloudflare Pages D1 Database (Serverless Backend)
+    fetch("/api/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newLead)
+    }).then(response => {
+      if (!response.ok) {
+        console.warn("Backend submission failed, saved locally instead.");
+      } else {
+        console.log("Successfully stored lead in D1 Database via Cloudflare Pages Function!");
+      }
+    }).catch(err => {
+      console.warn("Network error submitting lead to database. Saved locally.", err);
+    });
+
     // Prefill WhatsApp link and trigger redirect after short delay or via direct button
     const whatsappText = encodeURIComponent(
       `Olá Ana Flávia! Meu nome é ${formData.name} da empresa ${formData.company}. Vi seu portfólio profissional de Marketing & UGC e gostaria de agendar uma consulta sobre nossa estratégia de conteúdo no segmento de ${formData.segment}.`
@@ -216,6 +268,17 @@ export default function App() {
   const handleClearLeads = () => {
     localStorage.removeItem("ana_flavia_leads");
     setLeadsList([]);
+
+    // Clear Cloudflare Pages D1 Database
+    fetch("/api/leads", {
+      method: "DELETE"
+    }).then(response => {
+      if (response.ok) {
+        console.log("All database leads cleared successfully.");
+      }
+    }).catch(err => {
+      console.warn("Could not clear leads from Cloudflare database.", err);
+    });
   };
 
   // ROI calculations
