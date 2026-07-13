@@ -80,14 +80,6 @@ export const CLIENTS: ClientLogo[] = [
     image: IMAGES.clientStudio360,
     category: "beleza"
   },
-  { 
-    name: "Fortaleza Móveis", 
-    shortName: "Fortaleza", 
-    color: "bg-stone-900 text-stone-100 border-stone-600", 
-    text: "FM", 
-    image: IMAGES.clientFortaleza,
-    category: "todos"
-  },
 ];
 
 export const SERVICES: ServiceItem[] = [
@@ -114,8 +106,9 @@ export const PRODUCTS: ProductItem[] = [
 ];
 
 export const PORTFOLIO_CASES: PortfolioCase[] = [
+  // --- MODA (Milu Tecidos) ---
   {
-    id: "case-moda",
+    id: "case-moda-1",
     category: "moda",
     categoryLabel: "Moda & Tecidos",
     clientName: "Milu Tecidos",
@@ -123,7 +116,7 @@ export const PORTFOLIO_CASES: PortfolioCase[] = [
     instagramUrl: "https://www.instagram.com/milutecidos",
     description: "Criação de conteúdo focado em demonstrar a qualidade dos tecidos 100% algodão e engajamento divertido com a audiência.",
     videoCaption: "Hoje eu vim falar com vocês sobre os tecidos 100% algodão. Quando o marketing quer gravar vídeos... Oi genteee! Bom dia pessoal!",
-    coverImage: IMAGES.caseModa, // Elegant fabrics
+    coverImage: IMAGES.caseModa1,
     accentColor: "from-rose-800 to-amber-700",
     videoDurationSeconds: 15,
     likes: "1.4k",
@@ -131,15 +124,49 @@ export const PORTFOLIO_CASES: PortfolioCase[] = [
     details: ["Aumento de 42% nas mensagens diretas sobre o tecido de algodão", "Roteiro focado em quebrar a objeção de encolhimento do tecido", "Uso de humor corporativo focado no público-alvo de costureiras e estilistas"]
   },
   {
-    id: "case-beleza",
+    id: "case-moda-2",
+    category: "moda",
+    categoryLabel: "Moda & Tecidos",
+    clientName: "Milu Tecidos",
+    instagramHandle: "@milutecidos",
+    instagramUrl: "https://www.instagram.com/milutecidos",
+    description: "Unboxing dinâmico mostrando texturas e paletas exclusivas de novas coleções de Outono/Inverno.",
+    videoCaption: "🚨 ALERTA DE NOVIDADE! Chegaram os novos linhos e tricolines da semana. Olha o caimento desse tecido e a vivacidade das cores! Perfeitos para alfaiataria.",
+    coverImage: IMAGES.caseModa2,
+    accentColor: "from-rose-900 to-red-800",
+    videoDurationSeconds: 20,
+    likes: "1.9k",
+    comments: "205",
+    details: ["Exibição em macro das fibras do linho destacando toque suave", "Vídeo interativo nos stories convertendo em 30+ pedidos no atacado", "Segmentação direcionada a ateliês de costura personalizados"]
+  },
+  {
+    id: "case-moda-3",
+    category: "moda",
+    categoryLabel: "Moda & Tecidos",
+    clientName: "Milu Tecidos",
+    instagramHandle: "@milutecidos",
+    instagramUrl: "https://www.instagram.com/milutecidos",
+    description: "Tutorial em estilo UGC ensinando a testar a pureza do algodão e caimento em peças reais.",
+    videoCaption: "Costurando meu próprio vestido com tecidos da Milu! 🧵✨ O processo é super simples quando o algodão é de alta qualidade. Gostaram do resultado final?",
+    coverImage: IMAGES.caseModa3,
+    accentColor: "from-amber-800 to-amber-600",
+    videoDurationSeconds: 18,
+    likes: "2.3k",
+    comments: "192",
+    details: ["Prova social real com o passo a passo da confecção do vestido", "Fortalecimento do branding orgânico através de engajamento 'faça você mesmo'", "Mais de 150 compartilhamentos no Instagram Reels"]
+  },
+
+  // --- BELEZA (Elly Picanço | Studio 360) ---
+  {
+    id: "case-beleza-1",
     category: "beleza",
     categoryLabel: "Espaço de Beleza",
-    clientName: "Elly Picanso | Studio 360",
+    clientName: "Elly Picanço | Studio 360",
     instagramHandle: "@ellypicanco_studio360",
-    instagramUrl: "https://www.instagram.com/ellypicanco_studio360", // note slide link variation
+    instagramUrl: "https://www.instagram.com/ellypicanco_studio360",
     description: "Posicionamento premium focado em contar a história de mais de 40 anos de sofisticação e a evolução do design de sobrancelhas.",
     videoCaption: "Eu tive que me adaptar a todas as mudanças no Design de Sobrancelhas nas últimas décadas... Um trabalho de naturalidade, sofisticação e autoestima.",
-    coverImage: IMAGES.caseBeleza, // Beauty / cosmetology
+    coverImage: IMAGES.caseBeleza1,
     accentColor: "from-purple-800 to-pink-700",
     videoDurationSeconds: 20,
     likes: "2.1k",
@@ -147,15 +174,49 @@ export const PORTFOLIO_CASES: PortfolioCase[] = [
     details: ["Branding humanizado focado na vasta experiência da fundadora", "Geração de autoridade e diferenciação contra concorrentes 'low-cost'", "Formatos dinâmicos gerando mais de 15 agendamentos diretos via direct por vídeo"]
   },
   {
-    id: "case-joias",
+    id: "case-beleza-2",
+    category: "beleza",
+    categoryLabel: "Espaço de Beleza",
+    clientName: "Elly Picanço | Studio 360",
+    instagramHandle: "@ellypicanco_studio360",
+    instagramUrl: "https://www.instagram.com/ellypicanco_studio360",
+    description: "Vídeo de transformação e reação imediata da cliente ao espelho, destacando o método exclusivo de realce natural.",
+    videoCaption: "O poder de um olhar renovado! ✨ Veja a reação da nossa cliente ao ver o resultado do Design de Sobrancelhas personalizado. Naturalidade é a nossa marca registrada.",
+    coverImage: IMAGES.caseBeleza2,
+    accentColor: "from-fuchsia-900 to-purple-800",
+    videoDurationSeconds: 15,
+    likes: "3.4k",
+    comments: "310",
+    details: ["Gatilho mental da transformação visual real e imediata", "Foco no close-up de alta definição dos fios da sobrancelha", "Campanha gerou pico histórico de agendamentos no mês"]
+  },
+  {
+    id: "case-beleza-3",
+    category: "beleza",
+    categoryLabel: "Espaço de Beleza",
+    clientName: "Elly Picanço | Studio 360",
+    instagramHandle: "@ellypicanco_studio360",
+    instagramUrl: "https://www.instagram.com/ellypicanco_studio360",
+    description: "Vídeo de rotina estética mostrando os bastidores do atendimento e rituais de biossegurança do estúdio.",
+    videoCaption: "Um dia de spa e autocuidado aqui no Studio 360! 💆‍♀️ Cuidamos de cada detalhe para você se sentir única e maravilhosa. Já agendou o seu momento da semana?",
+    coverImage: IMAGES.caseBeleza3,
+    accentColor: "from-amber-950 to-stone-900",
+    videoDurationSeconds: 22,
+    likes: "1.8k",
+    comments: "167",
+    details: ["Quebra de objeções sobre higiene e biossegurança em procedimentos", "Construção de desejo através da experiência de luxo no atendimento", "Aumento de 25% na fidelização de clientes recorrentes"]
+  },
+
+  // --- JOIAS (Luluzinha Joias) ---
+  {
+    id: "case-joias-1",
     category: "joias",
     categoryLabel: "Joias e Semijoias",
-    clientName: "Luluzinha Joias e Semijoias",
+    clientName: "Luluzinha Joias",
     instagramHandle: "@luluzinhajoiasesemijoias",
     instagramUrl: "https://www.instagram.com/luluzinhajoiasesemijoias",
     description: "Vídeos de UGC dinâmicos mostrando a experiência tátil de revelação e uso das joias, focados em recrutar novas revendedoras.",
     videoCaption: "Semijoias Atemporais 100% Consignado. Seja uma REVENDEDORA. Veja esse brilho! Joias que transformam qualquer visual.",
-    coverImage: IMAGES.caseJoias, // Fine jewelry
+    coverImage: IMAGES.caseJoias1,
     accentColor: "from-amber-900 to-amber-600",
     videoDurationSeconds: 12,
     likes: "980",
@@ -163,7 +224,41 @@ export const PORTFOLIO_CASES: PortfolioCase[] = [
     details: ["Apresentação visual rica (macro detalhes das peças)", "Vídeo focado no gatilho mental da oportunidade financeira ('Seja uma revendedora')", "Aumento expressivo no engajamento nos stories com enquetes interativas"]
   },
   {
-    id: "case-educacao",
+    id: "case-joias-2",
+    category: "joias",
+    categoryLabel: "Joias e Semijoias",
+    clientName: "Luluzinha Joias",
+    instagramHandle: "@luluzinhajoiasesemijoias",
+    instagramUrl: "https://www.instagram.com/luluzinhajoiasesemijoias",
+    description: "Teste de resistência e brilho das semijoias banhadas a ouro 18k em situações do cotidiano.",
+    videoCaption: "Suas semijoias escurecem fácil? Aqui não! 💦 Provando a durabilidade e o banho de ouro 18k das nossas peças sob a água. Qualidade que você sente na pele.",
+    coverImage: IMAGES.caseJoias2,
+    accentColor: "from-amber-950 to-amber-700",
+    videoDurationSeconds: 16,
+    likes: "1.7k",
+    comments: "145",
+    details: ["Demonstração prática de durabilidade anti-oxidação do banho de ouro", "Foco na quebra da barreira de compra online de acessórios", "Conversão de leads qualificados para o canal de revendedoras"]
+  },
+  {
+    id: "case-joias-3",
+    category: "joias",
+    categoryLabel: "Joias e Semijoias",
+    clientName: "Luluzinha Joias",
+    instagramHandle: "@luluzinhajoiasesemijoias",
+    instagramUrl: "https://www.instagram.com/luluzinhajoiasesemijoias",
+    description: "Guia prático de moda ensinando a combinar diferentes peças e criar mix de colares de luxo.",
+    videoCaption: "Aprenda a montar o mix perfeito de colares e brincos para valorizar seu look de festa! 💎 Detalhes que fazem toda a diferença na sua sofisticação.",
+    coverImage: IMAGES.caseJoias3,
+    accentColor: "from-emerald-950 to-emerald-800",
+    videoDurationSeconds: 14,
+    likes: "2.2k",
+    comments: "208",
+    details: ["Conteúdo educativo agregando valor estético além da venda pura", "Uso de chamadas de ação claras para compra do kit completo nos stories", "Aumento orgânico na taxa de recompra de clientes finais"]
+  },
+
+  // --- EDUCACAO (Colégio Del Rey) ---
+  {
+    id: "case-educacao-1",
     category: "educacao",
     categoryLabel: "Educação Particular",
     clientName: "Colégio Del Rey",
@@ -171,12 +266,44 @@ export const PORTFOLIO_CASES: PortfolioCase[] = [
     instagramUrl: "https://www.instagram.com/colegiodelrey",
     description: "Vídeos alegres e humanizados retratando a vida escolar real, ensaios da banda e a conexão entre pais, alunos e escola.",
     videoCaption: "Escola particular - Preparação de verdade para o ENEM e para a Vida! Olha a minha mãe orgulhosa ali... Viva o desfile da nossa banda!",
-    coverImage: IMAGES.caseEducacao, // Education school
+    coverImage: IMAGES.caseEducacao1,
     accentColor: "from-blue-900 to-sky-700",
     videoDurationSeconds: 18,
     likes: "3.2k",
     comments: "412",
     details: ["Humanização da marca da escola particular para criar laços emocionais com os pais", "Engajamento altíssimo da comunidade de alunos compartilhando e comentando", "Demonstração de atividades práticas que geram valor além da sala de aula tradicional"]
+  },
+  {
+    id: "case-educacao-2",
+    category: "educacao",
+    categoryLabel: "Educação Particular",
+    clientName: "Colégio Del Rey",
+    instagramHandle: "@colegiodelrey",
+    instagramUrl: "https://www.instagram.com/colegiodelrey",
+    description: "Destaque de atividades pedagógicas inovadoras com os experimentos de laboratório dos alunos.",
+    videoCaption: "Ciência na prática! 🧪 Nossos alunos do Ensino Médio dando um show nos experimentos de química hoje. Aqui a teoria encontra a vivência real!",
+    coverImage: IMAGES.caseEducacao2,
+    accentColor: "from-sky-900 to-blue-800",
+    videoDurationSeconds: 20,
+    likes: "2.8k",
+    comments: "195",
+    details: ["Foco na infraestrutura moderna e qualidade pedagógica inovadora", "Aproximação com pais interessados em ensino voltado para ciências e tecnologia", "Mais de 120 salvamentos do post por famílias da região"]
+  },
+  {
+    id: "case-educacao-3",
+    category: "educacao",
+    categoryLabel: "Educação Particular",
+    clientName: "Colégio Del Rey",
+    instagramHandle: "@colegiodelrey",
+    instagramUrl: "https://www.instagram.com/colegiodelrey",
+    description: "Apresentação da metodologia de tecnologia aplicada no ensino e laboratório de informática.",
+    videoCaption: "Como a tecnologia potencializa o aprendizado ativo! 💻 Conheça nossas salas interativas e a metodologia inovadora que prepara nossos jovens para o futuro.",
+    coverImage: IMAGES.caseEducacao3,
+    accentColor: "from-indigo-900 to-sky-800",
+    videoDurationSeconds: 15,
+    likes: "1.9k",
+    comments: "134",
+    details: ["Fortalecimento do pilar tecnológico e inovador da instituição", "Geração de leads interessados em agendar visitas presenciais no colégio", "Retenção de matrículas através de transparência educacional com a comunidade"]
   }
 ];
 

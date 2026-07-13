@@ -88,8 +88,19 @@ export default function App() {
   }, []);
 
   // Filter cases based on selected category tab
-  const filteredCases = activeTab === "todos" 
-    ? PORTFOLIO_CASES 
+  // When "todos" is selected, display exactly 1 case from each client.
+  // When a specific category is selected, display all 3 cases of that client.
+  const filteredCases = activeTab === "todos"
+    ? (() => {
+        const seen = new Set<string>();
+        return PORTFOLIO_CASES.filter(c => {
+          if (!seen.has(c.category)) {
+            seen.add(c.category);
+            return true;
+          }
+          return false;
+        });
+      })()
     : PORTFOLIO_CASES.filter(c => c.category === activeTab);
 
   // Simulate progress when a case is open in the player
