@@ -27,7 +27,10 @@ import {
   ArrowUpRight,
   MousePointerClick,
   Target,
-  Film
+  Film,
+  Palette,
+  Layers,
+  Type
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
@@ -924,35 +927,140 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {DESIGNS.map((d) => (
-              <div 
-                key={d.id} 
-                className="group relative h-80 rounded-2xl overflow-hidden border border-brand-olive-200 shadow-md bg-white p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                {/* Background Styled Mock Phone Canvas */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${d.color} opacity-95 group-hover:scale-105 transition-transform duration-700 -z-10`} />
-                <div className="absolute inset-0 bg-black/40 -z-10" />
+            {DESIGNS.map((d) => {
+              const isLight = d.id === "d1";
+              return (
+                <div 
+                  key={d.id} 
+                  className={`group relative flex flex-col justify-between min-h-[500px] rounded-3xl overflow-hidden border ${isLight ? "border-stone-200 shadow-md bg-stone-50 text-stone-900" : "border-brand-olive-200/80 shadow-md bg-white text-stone-250"} p-5 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5`}
+                >
+                  {/* Smartphone screen backlight gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-b ${d.color} opacity-100 group-hover:scale-[1.03] transition-transform duration-700 -z-10`} />
+                  
+                  {/* Top Phone Interface / Header simulation */}
+                  <div className="space-y-3">
+                    {/* Phone status bar decoration with client's Instagram */}
+                    <div className={`flex items-center justify-between text-[10px] ${isLight ? "text-stone-800/60 border-stone-800/20" : "text-white/40 border-white/10"} font-mono tracking-wider border-b pb-2`}>
+                      <div className="flex items-center gap-1.5">
+                        <span className={`w-1.5 h-1.5 rounded-full ${isLight ? "bg-stone-600 animate-pulse" : "bg-emerald-400 animate-pulse"}`} />
+                        <span className={`font-semibold ${isLight ? "text-stone-800" : "text-white/50"}`}>{d.handle}</span>
+                      </div>
+                      <Instagram className={`h-3.5 w-3.5 ${isLight ? "text-stone-800" : "text-white/50"} group-hover:text-brand-gold-500 transition-colors`} />
+                    </div>
 
-                {/* Top HUD decoration */}
-                <div className="flex items-center justify-between text-brand-olive-400 text-[9px] font-mono">
-                  <span>DESIGN TEMPLATE</span>
-                  <span>PREMIUM GRID</span>
-                </div>
+                    {/* Middle Mock Post Design Canvas (Realistic Social Media Layout) */}
+                    <div className={`relative h-44 rounded-xl overflow-hidden shadow-inner flex flex-col justify-between p-4 border ${isLight ? "border-stone-800/15 bg-white/25" : "border-white/10 bg-black/15"}`}>
+                      
+                      {/* Brand-specific visual elements */}
+                      {d.id === "d1" && (
+                        <>
+                          {/* Studio 360 lashes visual effect with beautiful soft center */}
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(215,192,212,0.35)_0%,transparent_75%)]" />
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 border border-[#bfb1d1]/50 rounded-full flex items-center justify-center">
+                            <div className="w-24 h-24 border border-dashed border-[#bfb1d1]/30 rounded-full" />
+                          </div>
+                          {/* Small sparkling icon */}
+                          <Sparkles className="absolute top-3 right-3 h-4 w-4 text-[#bfb1d1] animate-pulse" />
+                        </>
+                      )}
 
-                {/* Middle Elegant Cover Title */}
-                <div className="text-center py-8 space-y-2">
-                  <div className="text-[10px] tracking-widest text-brand-gold-300 uppercase font-bold">{d.client}</div>
-                  <h3 className="font-serif text-2xl font-bold text-white leading-tight px-4">{d.title}</h3>
-                  <div className="text-xs italic text-stone-300 font-serif">{d.subtitle}</div>
-                </div>
+                      {d.id === "d2" && (
+                        <>
+                          {/* Luluzinha delicate golden border frame */}
+                          <div className="absolute inset-2 border border-[#D4AF37]/40 rounded-lg pointer-events-none" />
+                          <div className="absolute inset-3 border border-double border-[#D4AF37]/25 rounded-md pointer-events-none" />
+                        </>
+                      )}
 
-                {/* Bottom details card */}
-                <div className="bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-lg text-left">
-                  <p className="text-[10px] text-stone-200 uppercase font-bold tracking-wider">Objetivo de Design</p>
-                  <p className="text-[11px] text-stone-300 line-clamp-2 mt-0.5">{d.description}</p>
+                      {d.id === "d3" && (
+                        <>
+                          {/* Colégio Del Rey school design accent */}
+                          <div className="absolute top-0 right-0 w-24 h-full bg-[#F39C12] -skew-x-[35deg] origin-top opacity-20 pointer-events-none" />
+                          <div className="absolute bottom-0 left-0 w-16 h-4 bg-[#F39C12] rounded-r opacity-90" />
+                        </>
+                      )}
+
+                      {d.id === "d4" && (
+                        <>
+                          {/* Milu Tecidos fabric wave effect */}
+                          <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-[#F7EBE1]/10 rounded-full blur-md" />
+                          <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#8B1C33] rounded-full mix-blend-color-dodge opacity-25" />
+                        </>
+                      )}
+
+                      {/* Header with Client Name inside post */}
+                      <div className="z-10 flex items-center gap-1.5">
+                        <div className={`w-5 h-5 rounded-full ${d.brandColors[2].bgClass} text-stone-900 font-bold text-[8px] flex items-center justify-center shadow-sm`}>
+                          {d.client.substring(0, 1)}
+                        </div>
+                        <span className={`text-[9px] font-bold ${isLight ? "text-stone-800" : "text-stone-200"} tracking-wide uppercase`}>{d.client}</span>
+                      </div>
+
+                      {/* Inner Text with real fonts */}
+                      <div className="z-10 space-y-1">
+                        <h4 className={`${d.fontClass} ${isLight ? "text-stone-900" : "text-white"} font-bold leading-tight drop-shadow-sm text-base tracking-wide`}>
+                          {d.title}
+                        </h4>
+                        <p className={`text-[10px] ${isLight ? "text-stone-700 font-semibold" : "text-stone-200"} italic font-medium font-serif`}>
+                          {d.subtitle}
+                        </p>
+                      </div>
+
+                      {/* Small Bottom Status decoration */}
+                      <div className={`z-10 flex justify-between text-[8px] ${isLight ? "text-stone-600" : "text-stone-400"} font-mono tracking-widest uppercase`}>
+                        <span>TEMPLATE POST</span>
+                        <span>#FEEDORGANIZADO</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Brand Asset details below simulation screen */}
+                  <div className={`space-y-4 pt-4 border-t ${isLight ? "border-stone-800/10" : "border-white/10"} z-10`}>
+                    
+                    {/* Brand Color Palettes Display */}
+                    <div className="space-y-1.5">
+                      <div className={`flex items-center gap-1 text-[9px] font-bold tracking-wider ${isLight ? "text-stone-600" : "text-stone-400"} uppercase font-mono`}>
+                        <Palette className="h-3 w-3 text-brand-gold-500" /> Paleta de Cores
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {d.brandColors.map((color, idx) => (
+                          <div key={idx} className={`flex items-center gap-1 ${isLight ? "bg-white border-stone-200/80" : "bg-black/30 border-white/5"} border py-0.5 px-2 rounded-full text-[9px] ${isLight ? "text-stone-800 font-semibold" : "text-stone-300"} font-mono font-medium`}>
+                            <span className={`w-2.5 h-2.5 rounded-full ${color.bgClass} shadow-sm border border-black/10 shrink-0`} />
+                            <span>{color.name}</span>
+                            <span className="text-[8px] text-stone-500 font-semibold">{color.hex}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Brand Typography Details */}
+                    <div className={`grid grid-cols-2 gap-2 ${isLight ? "bg-stone-100 border-stone-200" : "bg-black/20 border-white/5"} p-2.5 rounded-xl border text-left`}>
+                      <div className="space-y-0.5">
+                        <div className={`flex items-center gap-1 text-[8px] font-bold tracking-wider ${isLight ? "text-stone-600" : "text-stone-400"} uppercase font-mono`}>
+                          <Type className="h-2.5 w-2.5 text-brand-gold-500" /> Tipografia
+                        </div>
+                        <div className={`text-[9px] ${isLight ? "text-stone-900 font-bold" : "text-stone-200 font-semibold"} truncate`}>{d.typography}</div>
+                      </div>
+                      <div className="space-y-0.5">
+                        <div className={`flex items-center gap-1 text-[8px] font-bold tracking-wider ${isLight ? "text-stone-600" : "text-stone-400"} uppercase font-mono`}>
+                          <Layers className="h-2.5 w-2.5 text-brand-gold-500" /> Diretriz Visual
+                        </div>
+                        <div className={`text-[9px] ${isLight ? "text-stone-900 font-bold" : "text-stone-200 font-semibold"} truncate`} title={d.visualStyle}>
+                          {d.visualStyle}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom details card (Glassmorphism) */}
+                    <div className={`${isLight ? "bg-stone-100 border-stone-200" : "bg-white/5 border-white/10"} border backdrop-blur-md p-3 rounded-xl text-left`}>
+                      <p className={`text-[9px] ${isLight ? "text-stone-800 font-extrabold" : "text-brand-gold-300 font-extrabold"} uppercase tracking-wider`}>Objetivo de Design</p>
+                      <p className={`text-[11px] ${isLight ? "text-stone-800 font-semibold" : "text-stone-200"} leading-relaxed font-medium mt-1`}>{d.description}</p>
+                    </div>
+
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>

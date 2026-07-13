@@ -38,13 +38,24 @@ export interface PortfolioCase {
   details: string[];
 }
 
+export interface BrandColor {
+  name: string;
+  hex: string;
+  bgClass: string;
+}
+
 export interface DesignPortfolioItem {
   id: string;
   title: string;
   subtitle: string;
   client: string;
+  handle: string;
   color: string;
   description: string;
+  typography: string;
+  fontClass: string;
+  brandColors: BrandColor[];
+  visualStyle: string;
 }
 
 export const CLIENTS: ClientLogo[] = [
@@ -312,32 +323,68 @@ export const DESIGNS: DesignPortfolioItem[] = [
     id: "d1",
     title: "Profissão Beleza",
     subtitle: "A história contada por Elly Picanço",
-    client: "Elly Picanso Studio 360",
-    color: "from-amber-950 to-stone-900",
-    description: "Criação de identidade editorial para capas de destaque e postagens de carrossel biográficas."
+    client: "Elly Picanço | Studio 360",
+    handle: "@ellypicanco_studio360",
+    color: "from-[#bfb1d1] via-[#d7c0d4] to-[#DFB382]",
+    description: "Identidade visual leve, minimalista e sofisticada com tons pastéis acolhedores e elegantes.",
+    typography: "Playfair Display (Serif Elegante) & Inter (Sans)",
+    fontClass: "font-serif",
+    brandColors: [
+      { name: "Lilás Acinzentado Pastel", hex: "#bfb1d1", bgClass: "bg-[#bfb1d1]" },
+      { name: "Bege", hex: "#d7c0d4", bgClass: "bg-[#d7c0d4]" },
+      { name: "Ouro Champagne", hex: "#DFB382", bgClass: "bg-[#DFB382]" }
+    ],
+    visualStyle: "Estética Clean Girl com linhas finas douradas, fundo pastel suave e atmosfera de bem-estar."
   },
   {
     id: "d2",
     title: "Coleção Brisa",
     subtitle: "Campanha de Semijoias Atemporais",
     client: "Luluzinha Joias",
-    color: "from-emerald-950 to-stone-900",
-    description: "Design elegante focado em minimalismo com tipografia serifada luxuosa para catálogo digital."
+    handle: "@luluzinhajoiasesemijoias",
+    color: "from-[#082A1B] via-[#03150C] to-stone-950",
+    description: "Design elegante focado em minimalismo com tipografia serifada luxuosa para catálogo digital.",
+    typography: "Cinzel (Serif Imperial) & Montserrat (Sans)",
+    fontClass: "font-serif",
+    brandColors: [
+      { name: "Verde Esmeralda", hex: "#082A1B", bgClass: "bg-[#082A1B]" },
+      { name: "Verde Lodo Escuro", hex: "#03150C", bgClass: "bg-[#03150C]" },
+      { name: "Ouro 18k", hex: "#D4AF37", bgClass: "bg-[#D4AF37]" }
+    ],
+    visualStyle: "Múltiplas linhas finas douradas, margens limpas amplas e destaque para pedras preciosas."
   },
   {
     id: "d3",
     title: "Enem & Vida",
     subtitle: "Campanha de Matrículas 2026",
     client: "Colégio Del Rey",
-    color: "from-blue-950 to-stone-900",
-    description: "Identidade visual forte para captação de novos alunos unindo as cores tradicionais da instituição."
+    handle: "@colegiodelrey",
+    color: "from-[#11245A] via-[#0A1435] to-stone-950",
+    description: "Identidade visual forte para captação de novos alunos unindo as cores tradicionais da instituição.",
+    typography: "Outfit (Sans Impactante) & Space Grotesk",
+    fontClass: "font-sans font-black uppercase tracking-tight",
+    brandColors: [
+      { name: "Azul Imperial", hex: "#11245A", bgClass: "bg-[#11245A]" },
+      { name: "Azul Marinho", hex: "#0A1435", bgClass: "bg-[#0A1435]" },
+      { name: "Amarelo Acadêmico", hex: "#F39C12", bgClass: "bg-[#F39C12]" }
+    ],
+    visualStyle: "Cortes geométricos diagonais, caixas de destaque de alto impacto e grids acadêmicos organizados."
   },
   {
     id: "d4",
     title: "Algodão Premium",
     subtitle: "Lançamento de Malhas e Tecidos",
     client: "Milu Tecidos",
-    color: "from-rose-950 to-stone-900",
-    description: "Layouts harmônicos com texturas realistas e paletas quentes para engajar no Instagram Stories."
+    handle: "@milutecidos",
+    color: "from-[#8B1C33] via-[#4D0D19] to-stone-950",
+    description: "Layouts harmônicos com texturas realistas e paletas quentes para engajar no Instagram Stories.",
+    typography: "Cormorant Garamond (Serif Orgânico) & Inter",
+    fontClass: "font-serif",
+    brandColors: [
+      { name: "Terracota Rosado", hex: "#8B1C33", bgClass: "bg-[#8B1C33]" },
+      { name: "Marsala", hex: "#4D0D19", bgClass: "bg-[#4D0D19]" },
+      { name: "Algodão Cru", hex: "#F7EBE1", bgClass: "bg-[#F7EBE1]" }
+    ],
+    visualStyle: "Ondulações orgânicas simulando dobras de tecidos, costuras pontilhadas e texturas quentes."
   }
 ];
