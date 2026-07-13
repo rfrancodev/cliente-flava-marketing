@@ -18,6 +18,7 @@ import {
   X, 
   Briefcase, 
   ChevronRight, 
+  ChevronDown,
   Calculator, 
   Smartphone, 
   Eye, 
@@ -58,7 +59,7 @@ export default function App() {
   const [simulationViews, setSimulationViews] = useState(12840);
   
   // ROI Calculator States
-  const [budget, setBudget] = useState(1500); // R$
+  const [budget, setBudget] = useState(400); // R$
   const [ticket, setTicket] = useState(120); // R$ average product price
   const [nicheConversionFactor, setNicheConversionFactor] = useState(1.2); // weight multiplier
 
@@ -219,9 +220,11 @@ export default function App() {
 
   // ROI calculations
   // UGC generally delivers 3.2% CTR and 2.5x higher conversion than static standard ads.
-  const estimatedVideos = Math.max(1, Math.round(budget / 450));
+  // Each UGC video corresponds to R$ 200, starting from R$ 400 (which gives 2 UGC videos)
+  const estimatedVideos = Math.max(2, Math.floor(budget / 200));
   const estimatedViews = estimatedVideos * 12500;
-  const estimatedConversions = Math.round((estimatedViews * 0.022) * nicheConversionFactor);
+  // Adjusted to include a realistic conversion rate from views to purchases (CTR of 2.2% * Landing Page Conversion of 2.0%)
+  const estimatedConversions = Math.round((estimatedViews * 0.022 * 0.02) * nicheConversionFactor);
   const estimatedRevenue = estimatedConversions * ticket;
   const roas = (estimatedRevenue / budget).toFixed(1);
 
@@ -1239,7 +1242,7 @@ export default function App() {
                 </div>
                 <input 
                   type="range" 
-                  min="900" 
+                  min="400" 
                   max="10000" 
                   step="100" 
                   value={budget} 
@@ -1247,7 +1250,7 @@ export default function App() {
                   className="w-full accent-brand-gold-500 h-1.5 bg-brand-olive-950 rounded-full cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-stone-500">
-                  <span>R$ 900</span>
+                  <span>R$ 400</span>
                   <span>R$ 10.000</span>
                 </div>
               </div>
@@ -1275,16 +1278,21 @@ export default function App() {
 
               {/* Dropdown 3: Campaign Segment */}
               <div className="space-y-2">
-                <label className="text-xs sm:text-sm font-semibold block">{SITE_COPY.calculator.labelNiche}</label>
-                <select 
-                  onChange={(e) => setNicheConversionFactor(Number(e.target.value))}
-                  className="w-full px-4 py-2 bg-brand-olive-950 border border-brand-olive-800 text-brand-olive-100 rounded-lg text-xs font-bold focus:outline-none focus:border-brand-gold-500"
-                >
-                  <option value="1.2">{SITE_COPY.calculator.niches.moda}</option>
-                  <option value="1.5">{SITE_COPY.calculator.niches.joias}</option>
-                  <option value="1.1">{SITE_COPY.calculator.niches.beleza}</option>
-                  <option value="0.9">{SITE_COPY.calculator.niches.educacao}</option>
-                </select>
+                <label className="text-xs sm:text-sm font-bold block text-stone-200">{SITE_COPY.calculator.labelNiche}</label>
+                <div className="relative">
+                  <select 
+                    onChange={(e) => setNicheConversionFactor(Number(e.target.value))}
+                    className="w-full h-12 pl-4 pr-10 bg-brand-olive-950 border-2 border-brand-olive-700/80 text-white rounded-xl text-xs sm:text-sm font-extrabold appearance-none cursor-pointer focus:outline-none focus:border-brand-gold-400 focus:ring-4 focus:ring-brand-gold-500/20 transition-all duration-300 shadow-md"
+                  >
+                    <option value="1.2" className="bg-brand-olive-950 text-stone-100 font-semibold py-2">{SITE_COPY.calculator.niches.moda}</option>
+                    <option value="1.5" className="bg-brand-olive-950 text-stone-100 font-semibold py-2">{SITE_COPY.calculator.niches.joias}</option>
+                    <option value="1.1" className="bg-brand-olive-950 text-stone-100 font-semibold py-2">{SITE_COPY.calculator.niches.beleza}</option>
+                    <option value="0.9" className="bg-brand-olive-950 text-stone-100 font-semibold py-2">{SITE_COPY.calculator.niches.educacao}</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none text-brand-gold-400">
+                    <ChevronDown className="h-5 w-5 stroke-[2.5]" />
+                  </div>
+                </div>
               </div>
 
               {/* Output stats display */}
@@ -1311,7 +1319,7 @@ export default function App() {
                   <div className="font-serif text-xl font-bold text-white mt-1">
                     {estimatedConversions} conversões
                   </div>
-                  <div className="text-[9px] text-brand-gold-400/80">Com base no CTR de 2.2%</div>
+                  <div className="text-[9px] text-brand-gold-400/80">CTR de 2.2% e CVR de 2.0%</div>
                 </div>
                 <div>
                   <div className="text-[10px] text-brand-gold-400 font-bold uppercase tracking-wider">{SITE_COPY.calculator.revenueLabel}</div>
