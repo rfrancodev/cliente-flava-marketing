@@ -75,6 +75,25 @@ export default function App() {
   const [leadsList, setLeadsList] = useState<any[]>([]);
   const [showLeadsPanel, setShowLeadsPanel] = useState(false);
 
+  // Design Portfolio Auto-Highlight states
+  const [highlightedDesignId, setHighlightedDesignId] = useState<string>("d1");
+  const [isDesignHovered, setIsDesignHovered] = useState<boolean>(false);
+
+  // Auto-highlight effect for Design Portfolio (3 seconds per card)
+  useEffect(() => {
+    if (isDesignHovered) return;
+
+    const interval = setInterval(() => {
+      setHighlightedDesignId((currentId) => {
+        const currentIndex = DESIGNS.findIndex(d => d.id === currentId);
+        const nextIndex = (currentIndex + 1) % DESIGNS.length;
+        return DESIGNS[nextIndex].id;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isDesignHovered]);
+
   // References
   const simulationIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -929,34 +948,75 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {DESIGNS.map((d) => {
               const isLight = d.id === "d1";
+              const isActive = highlightedDesignId === d.id;
               return (
                 <div 
                   key={d.id} 
-                  className={`group relative flex flex-col justify-between min-h-[500px] rounded-3xl overflow-hidden border ${isLight ? "border-stone-200 shadow-md bg-stone-50 text-stone-900" : "border-brand-olive-200/80 shadow-md bg-white text-stone-250"} p-5 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5`}
+                  onMouseEnter={() => {
+                    setIsDesignHovered(true);
+                    setHighlightedDesignId(d.id);
+                  }}
+                  onMouseLeave={() => {
+                    setIsDesignHovered(false);
+                  }}
+                  className={`group relative flex flex-col justify-between min-h-[500px] rounded-3xl overflow-hidden border isolate p-5 transition-all duration-500 ${
+                    isActive 
+                      ? "border-brand-gold-500/90 shadow-2xl -translate-y-2.5 scale-[1.015] ring-2 ring-brand-gold-400/20" 
+                      : "border-brand-olive-200/30 shadow-md hover:shadow-xl hover:-translate-y-1"
+                  } ${
+                    isLight 
+                      ? "bg-stone-50 text-stone-900" 
+                      : "bg-white text-stone-250"
+                  }`}
                 >
                   {/* Smartphone screen backlight gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-b ${d.color} opacity-100 group-hover:scale-[1.03] transition-transform duration-700 -z-10`} />
+                  <div className={`absolute inset-0 bg-gradient-to-b ${d.color} opacity-100 transition-transform duration-700 -z-10 ${
+                    isActive ? "scale-[1.04]" : "scale-100 group-hover:scale-[1.02]"
+                  }`} />
                   
                   {/* Top Phone Interface / Header simulation */}
                   <div className="space-y-3">
                     {/* Phone status bar decoration with client's Instagram */}
-                    <div className={`flex items-center justify-between text-[10px] ${isLight ? "text-stone-800/60 border-stone-800/20" : "text-white/40 border-white/10"} font-mono tracking-wider border-b pb-2`}>
+                    <div className={`flex items-center justify-between text-[10px] ${
+                      isLight 
+                        ? (isActive ? "text-stone-950 font-semibold border-stone-800/30" : "text-stone-800/60 border-stone-800/10") 
+                        : (isActive ? "text-brand-gold-300 font-semibold border-brand-gold-500/20" : "text-white/40 border-white/10")
+                    } font-mono tracking-wider border-b pb-2 transition-colors duration-500`}>
                       <div className="flex items-center gap-1.5">
-                        <span className={`w-1.5 h-1.5 rounded-full ${isLight ? "bg-stone-600 animate-pulse" : "bg-emerald-400 animate-pulse"}`} />
-                        <span className={`font-semibold ${isLight ? "text-stone-800" : "text-white/50"}`}>{d.handle}</span>
+                        <span className={`w-1.5 h-1.5 rounded-full ${
+                          isActive 
+                            ? "bg-brand-gold-400 animate-ping" 
+                            : (isLight ? "bg-stone-600 animate-pulse" : "bg-emerald-400 animate-pulse")
+                        }`} />
+                        <span className={`font-semibold ${
+                          isActive 
+                            ? "text-brand-gold-400" 
+                            : (isLight ? "text-stone-800" : "text-white/50")
+                        } transition-colors duration-500`}>{d.handle}</span>
                       </div>
-                      <Instagram className={`h-3.5 w-3.5 ${isLight ? "text-stone-800" : "text-white/50"} group-hover:text-brand-gold-500 transition-colors`} />
+                      <div className="flex items-center gap-1">
+                        {isActive && !isDesignHovered && (
+                          <span className="text-[8px] uppercase tracking-widest text-brand-gold-400 animate-pulse mr-1">AUTO</span>
+                        )}
+                        <Instagram className={`h-3.5 w-3.5 transition-colors duration-500 ${
+                          isActive ? "text-brand-gold-400 scale-110" : (isLight ? "text-stone-800" : "text-white/50")
+                        }`} />
+                      </div>
                     </div>
 
                     {/* Middle Mock Post Design Canvas (Realistic Social Media Layout) */}
-                    <div className={`relative h-44 rounded-xl overflow-hidden shadow-inner flex flex-col justify-between p-4 border ${isLight ? "border-stone-800/15 bg-white/25" : "border-white/10 bg-black/15"}`}>
+                    <div className={`relative h-44 rounded-xl overflow-hidden shadow-inner flex flex-col justify-between p-4 border transition-all duration-500 ${
+                      isActive 
+                        ? (isLight ? "border-[#bfb1d1]/60 bg-white/40 shadow-md scale-[1.01]" : "border-white/20 bg-black/25 shadow-md scale-[1.01]") 
+                        : (isLight ? "border-stone-800/15 bg-white/25" : "border-white/10 bg-black/15")
+                    }`}>
                       
                       {/* Brand-specific visual elements */}
                       {d.id === "d1" && (
                         <>
                           {/* Studio 360 lashes visual effect with beautiful soft center */}
                           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(215,192,212,0.35)_0%,transparent_75%)]" />
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 border border-[#bfb1d1]/50 rounded-full flex items-center justify-center">
+                          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 border border-[#bfb1d1]/50 rounded-full flex items-center justify-center transition-transform duration-1000 ${isActive ? "rotate-45 scale-110" : ""}`}>
                             <div className="w-24 h-24 border border-dashed border-[#bfb1d1]/30 rounded-full" />
                           </div>
                           {/* Small sparkling icon */}
@@ -1009,22 +1069,37 @@ export default function App() {
                       {/* Small Bottom Status decoration */}
                       <div className={`z-10 flex justify-between text-[8px] ${isLight ? "text-stone-600" : "text-stone-400"} font-mono tracking-widest uppercase`}>
                         <span>TEMPLATE POST</span>
-                        <span>#FEEDORGANIZADO</span>
+                        <span>{isActive ? "★ EM DESTAQUE" : "#FEEDORGANIZADO"}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Brand Asset details below simulation screen */}
-                  <div className={`space-y-4 pt-4 border-t ${isLight ? "border-stone-800/10" : "border-white/10"} z-10`}>
+                  <div className={`space-y-4 pt-4 border-t ${
+                    isLight 
+                      ? (isActive ? "border-stone-800/20" : "border-stone-800/10") 
+                      : (isActive ? "border-white/20" : "border-white/10")
+                  } z-10`}>
                     
                     {/* Brand Color Palettes Display */}
                     <div className="space-y-1.5">
-                      <div className={`flex items-center gap-1 text-[9px] font-bold tracking-wider ${isLight ? "text-stone-600" : "text-stone-400"} uppercase font-mono`}>
-                        <Palette className="h-3 w-3 text-brand-gold-500" /> Paleta de Cores
+                      <div className={`flex items-center gap-1 text-[9px] font-bold tracking-wider ${
+                        isLight ? "text-stone-600" : "text-stone-400"
+                      } uppercase font-mono`}>
+                        <Palette className={`h-3 w-3 ${isActive ? "text-brand-gold-400 animate-spin-slow" : "text-brand-gold-500"}`} /> Paleta de Cores
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {d.brandColors.map((color, idx) => (
-                          <div key={idx} className={`flex items-center gap-1 ${isLight ? "bg-white border-stone-200/80" : "bg-black/30 border-white/5"} border py-0.5 px-2 rounded-full text-[9px] ${isLight ? "text-stone-800 font-semibold" : "text-stone-300"} font-mono font-medium`}>
+                          <div 
+                            key={idx} 
+                            className={`flex items-center gap-1 ${
+                              isLight 
+                                ? (isActive ? "bg-white border-stone-300 shadow-sm" : "bg-white border-stone-200/80") 
+                                : (isActive ? "bg-black/45 border-white/15" : "bg-black/30 border-white/5")
+                            } border py-0.5 px-2 rounded-full text-[9px] ${
+                              isLight ? "text-stone-800 font-semibold" : "text-stone-300"
+                            } font-mono font-medium transition-all duration-300`}
+                          >
                             <span className={`w-2.5 h-2.5 rounded-full ${color.bgClass} shadow-sm border border-black/10 shrink-0`} />
                             <span>{color.name}</span>
                             <span className="text-[8px] text-stone-500 font-semibold">{color.hex}</span>
@@ -1034,7 +1109,11 @@ export default function App() {
                     </div>
 
                     {/* Brand Typography Details */}
-                    <div className={`grid grid-cols-2 gap-2 ${isLight ? "bg-stone-100 border-stone-200" : "bg-black/20 border-white/5"} p-2.5 rounded-xl border text-left`}>
+                    <div className={`grid grid-cols-2 gap-2 ${
+                      isLight 
+                        ? (isActive ? "bg-stone-200/50 border-stone-300" : "bg-stone-100 border-stone-200") 
+                        : (isActive ? "bg-black/30 border-white/10" : "bg-black/20 border-white/5")
+                    } p-2.5 rounded-xl border text-left transition-colors duration-500`}>
                       <div className="space-y-0.5">
                         <div className={`flex items-center gap-1 text-[8px] font-bold tracking-wider ${isLight ? "text-stone-600" : "text-stone-400"} uppercase font-mono`}>
                           <Type className="h-2.5 w-2.5 text-brand-gold-500" /> Tipografia
@@ -1052,9 +1131,17 @@ export default function App() {
                     </div>
 
                     {/* Bottom details card (Glassmorphism) */}
-                    <div className={`${isLight ? "bg-stone-100 border-stone-200" : "bg-white/5 border-white/10"} border backdrop-blur-md p-3 rounded-xl text-left`}>
-                      <p className={`text-[9px] ${isLight ? "text-stone-800 font-extrabold" : "text-brand-gold-300 font-extrabold"} uppercase tracking-wider`}>Objetivo de Design</p>
-                      <p className={`text-[11px] ${isLight ? "text-stone-800 font-semibold" : "text-stone-200"} leading-relaxed font-medium mt-1`}>{d.description}</p>
+                    <div className={`${
+                      isLight 
+                        ? (isActive ? "bg-white/90 border-brand-gold-500/40 shadow-sm" : "bg-stone-100 border-stone-200") 
+                        : (isActive ? "bg-white/10 border-white/20 shadow-md" : "bg-white/5 border-white/10")
+                    } border backdrop-blur-md p-3 rounded-xl text-left transition-all duration-500`}>
+                      <p className={`text-[9px] ${
+                        isLight ? "text-brand-gold-600 font-black" : "text-brand-gold-300 font-extrabold"
+                      } uppercase tracking-wider`}>Objetivo de Design</p>
+                      <p className={`text-[11px] ${
+                        isLight ? "text-stone-800 font-semibold" : "text-stone-200"
+                      } leading-relaxed font-medium mt-1`}>{d.description}</p>
                     </div>
 
                   </div>
