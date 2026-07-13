@@ -1404,7 +1404,7 @@ export default function App() {
 
                   {/* Instagram */}
                   <a 
-                    href="https://www.instagram.com/anaflavia.focodigital" 
+                    href="https://www.instagram.com/anaflavia.focodigital2" 
                     target="_blank" 
                     rel="noreferrer"
                     className="flex items-center gap-4 p-4 bg-brand-olive-900 hover:bg-brand-olive-850 rounded-xl border border-brand-olive-800 hover:border-brand-gold-500/40 transition-all group"
@@ -1414,7 +1414,7 @@ export default function App() {
                     </div>
                     <div className="text-left">
                       <h4 className="text-xs font-bold uppercase tracking-widest text-stone-400">Instagram Profissional</h4>
-                      <p className="text-sm font-semibold text-white mt-0.5">@anaflavia.focodigital</p>
+                      <p className="text-sm font-semibold text-white mt-0.5">@anaflavia.focodigital2</p>
                       <span className="text-[10px] text-brand-gold-400 font-semibold uppercase tracking-wider flex items-center gap-1 mt-0.5">Ver Perfil <ArrowUpRight className="h-3 w-3" /></span>
                     </div>
                   </a>
@@ -1650,7 +1650,7 @@ export default function App() {
             {SITE_COPY.meta.description}
           </p>
           <div className="flex items-center justify-center gap-6 pt-2">
-            <a href="https://www.instagram.com/anaflavia.focodigital" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
+            <a href="https://www.instagram.com/anaflavia.focodigital2" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
               <Instagram className="h-5 w-5" />
             </a>
             <a href="mailto:aflaviafocodigital@gmail.com" className="hover:text-white transition-colors" aria-label="E-mail">
